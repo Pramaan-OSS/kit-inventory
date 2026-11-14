@@ -1,0 +1,113 @@
+{
+  "items": [
+    {
+      "id": "fulfil-sale",
+      "label": "Fulfils a sales order without making stock negative.",
+      "steps": [
+        {
+          "enterAs": "owner"
+        },
+        {
+          "goto": "/stock"
+        },
+        {
+          "fill": "Item name",
+          "value": "Sale item"
+        },
+        {
+          "fill": "SKU",
+          "value": "SALE"
+        },
+        {
+          "fill": "Cost",
+          "value": "1.25"
+        },
+        {
+          "fill": "Sale price",
+          "value": "2.50"
+        },
+        {
+          "click": "Save item"
+        },
+        {
+          "expectText": "Sale item"
+        },
+        {
+          "goto": "/settings"
+        },
+        {
+          "select": "Contact type",
+          "option": "Customer"
+        },
+        {
+          "fill": "Contact name",
+          "value": "Sale customer"
+        },
+        {
+          "fill": "Contact email",
+          "value": "customer@journey.test"
+        },
+        {
+          "click": "Add contact"
+        },
+        {
+          "expectText": "Sale customer"
+        },
+        {
+          "goto": "/stock"
+        },
+        {
+          "select": "Count item",
+          "option": "Sale item"
+        },
+        {
+          "fill": "Counted quantity",
+          "value": "5"
+        },
+        {
+          "fill": "Count reason",
+          "value": "Opening shelf count"
+        },
+        {
+          "click": "Record count"
+        },
+        {
+          "expectText": "Stock count recorded."
+        },
+        {
+          "select": "Order type",
+          "option": "Sales"
+        },
+        {
+          "select": "Line 1 item",
+          "option": "Sale item"
+        },
+        {
+          "select": "Contact",
+          "option": "Sale customer"
+        },
+        {
+          "fill": "Order reference",
+          "value": "Journey sale"
+        },
+        {
+          "fill": "Line 1 quantity",
+          "value": "1"
+        },
+        {
+          "click": "Create order"
+        },
+        {
+          "expectText": "Journey sale"
+        },
+        {
+          "click": "Fulfil Journey sale"
+        },
+        {
+          "expectText": "Sales order fulfilled."
+        }
+      ]
+    }
+  ],
+  "names": {}
+}

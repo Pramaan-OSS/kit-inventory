@@ -1,0 +1,27 @@
+{
+  "items": [
+    {
+      "id": "invite-staff",
+      "label": "Creates a single-use invitation for staff.",
+      "steps": [
+        {
+          "enterAs": "owner"
+        },
+        {
+          "goto": "/settings"
+        },
+        {
+          "fill": "Staff email",
+          "value": "checklist-staff@example.test"
+        },
+        {
+          "click": "Invite staff"
+        },
+        {
+          "expectText": "Invite ready for checklist-staff@example.test."
+        }
+      ]
+    }
+  ],
+  "names": {}
+}

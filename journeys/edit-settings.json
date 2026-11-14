@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "id": "edit-settings",
+      "label": "Adds and removes a category and keeps a category in use.",
+      "steps": [
+        {
+          "enterAs": "owner"
+        },
+        {
+          "goto": "/stock"
+        },
+        {
+          "fill": "Item name",
+          "value": "Settings item"
+        },
+        {
+          "fill": "SKU",
+          "value": "SETTINGS"
+        },
+        {
+          "fill": "Cost",
+          "value": "1.25"
+        },
+        {
+          "fill": "Sale price",
+          "value": "2.50"
+        },
+        {
+          "click": "Save item"
+        },
+        {
+          "expectText": "Settings item"
+        },
+        {
+          "goto": "/settings"
+        },
+        {
+          "fill": "New value",
+          "value": "Seasonal"
+        },
+        {
+          "click": "Add value"
+        },
+        {
+          "expectText": "Rename Seasonal"
+        },
+        {
+          "click": "Remove Seasonal"
+        },
+        {
+          "expectAbsent": "Rename Seasonal"
+        },
+        {
+          "click": "Remove General"
+        },
+        {
+          "expectText": "This value is in use and cannot be removed."
+        }
+      ]
+    }
+  ],
+  "names": {}
+}

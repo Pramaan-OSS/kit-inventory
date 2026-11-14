@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "id": "stock-overview",
+      "label": "Reads stock and the move ledger.",
+      "steps": [
+        {
+          "enterAs": "owner"
+        },
+        {
+          "goto": "/stock"
+        },
+        {
+          "expectText": "Stock moves"
+        }
+      ]
+    }
+  ],
+  "names": {}
+}

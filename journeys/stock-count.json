@@ -1,0 +1,57 @@
+{
+  "items": [
+    {
+      "id": "stock-count",
+      "label": "Records a counted quantity with a reason.",
+      "steps": [
+        {
+          "enterAs": "owner"
+        },
+        {
+          "goto": "/stock"
+        },
+        {
+          "fill": "Item name",
+          "value": "Count item"
+        },
+        {
+          "fill": "SKU",
+          "value": "COUNT"
+        },
+        {
+          "fill": "Cost",
+          "value": "1.25"
+        },
+        {
+          "fill": "Sale price",
+          "value": "2.50"
+        },
+        {
+          "click": "Save item"
+        },
+        {
+          "expectText": "Count item"
+        },
+        {
+          "select": "Count item",
+          "option": "Count item"
+        },
+        {
+          "fill": "Counted quantity",
+          "value": "12"
+        },
+        {
+          "fill": "Count reason",
+          "value": "Journey shelf count"
+        },
+        {
+          "click": "Record count"
+        },
+        {
+          "expectText": "Stock count recorded."
+        }
+      ]
+    }
+  ],
+  "names": {}
+}

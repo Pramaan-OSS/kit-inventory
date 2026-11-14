@@ -1,0 +1,9 @@
+{
+  "routes": ["/stock"],
+  "nav": [
+    {
+      "href": "/stock",
+      "label": "Stock"
+    }
+  ]
+}

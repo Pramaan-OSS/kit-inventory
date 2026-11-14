@@ -1,0 +1,91 @@
+{
+  "items": [
+    {
+      "id": "receive-purchase",
+      "label": "Creates and receives a purchase order.",
+      "steps": [
+        {
+          "enterAs": "owner"
+        },
+        {
+          "goto": "/stock"
+        },
+        {
+          "fill": "Item name",
+          "value": "Receipt item"
+        },
+        {
+          "fill": "SKU",
+          "value": "RECEIPT"
+        },
+        {
+          "fill": "Cost",
+          "value": "1.25"
+        },
+        {
+          "fill": "Sale price",
+          "value": "2.50"
+        },
+        {
+          "click": "Save item"
+        },
+        {
+          "expectText": "Receipt item"
+        },
+        {
+          "goto": "/settings"
+        },
+        {
+          "select": "Contact type",
+          "option": "Supplier"
+        },
+        {
+          "fill": "Contact name",
+          "value": "Receipt supplier"
+        },
+        {
+          "fill": "Contact email",
+          "value": "supplier@journey.test"
+        },
+        {
+          "click": "Add contact"
+        },
+        {
+          "expectText": "Receipt supplier"
+        },
+        {
+          "goto": "/stock"
+        },
+        {
+          "select": "Line 1 item",
+          "option": "Receipt item"
+        },
+        {
+          "select": "Contact",
+          "option": "Receipt supplier"
+        },
+        {
+          "fill": "Order reference",
+          "value": "Journey purchase"
+        },
+        {
+          "fill": "Line 1 quantity",
+          "value": "5"
+        },
+        {
+          "click": "Create order"
+        },
+        {
+          "expectText": "Journey purchase"
+        },
+        {
+          "click": "Receive Journey purchase"
+        },
+        {
+          "expectText": "Purchase received."
+        }
+      ]
+    }
+  ],
+  "names": {}
+}

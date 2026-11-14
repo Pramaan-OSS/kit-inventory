@@ -1,0 +1,203 @@
+{
+  "id": "inventory",
+  "version": "0.1.0",
+  "title": "Inventory and orders",
+  "summary": "A small shop tracks items, stock moves, suppliers, customers, purchase receipts and sales fulfilment.",
+  "category": "erp",
+  "stack": {
+    "contract": "1",
+    "template": "data",
+    "next": "16.3.6",
+    "react": "19.3.0",
+    "node": "24.18.0",
+    "packageManager": "pnpm@11.15.1"
+  },
+  "licence": "MIT",
+  "provenance": {
+    "mode": "derived",
+    "starter": "Pramaan-Dev/product-loop@370419379645405019af029fa08a75680ad75c8b",
+    "derivedFrom": ["Pramaan-Dev/product-loop@370419379645405019af029fa08a75680ad75c8b"],
+    "upstreamNotices": ["NOTICE.md"],
+    "writtenBy": "person"
+  },
+  "measured": {
+    "on": "2026-11-14",
+    "by": "person",
+    "draft": {
+      "peakMiB": 901,
+      "limitMiB": 2560,
+      "firstAnswerSeconds": 4
+    },
+    "verifier": {
+      "peakMiB": 1100,
+      "limitMiB": 2048,
+      "seconds": 12
+    },
+    "browser": {
+      "peakMiB": 176,
+      "limitMiB": 1024
+    }
+  },
+  "entryPoints": [
+    {
+      "route": "/",
+      "file": "app/page.tsx",
+      "audience": "visitor",
+      "summary": "Sign in with an invited staff or owner account."
+    },
+    {
+      "route": "/stock",
+      "file": "app/stock/page.tsx",
+      "audience": "staff",
+      "summary": "Track stock, receive purchase orders and fulfil sales orders."
+    },
+    {
+      "route": "/settings",
+      "file": "app/settings/page.tsx",
+      "audience": "owner",
+      "summary": "Manage locations, contacts, categories, statuses and staff invitations."
+    },
+    {
+      "route": "/owner",
+      "file": "app/owner/page.tsx",
+      "audience": "owner",
+      "summary": "Choose or change owner sign-in details."
+    },
+    {
+      "route": "/invite",
+      "file": "app/invite/page.tsx",
+      "audience": "visitor",
+      "summary": "Choose a password from a single-use staff invitation."
+    },
+    {
+      "route": "/password-reset",
+      "file": "app/password-reset/page.tsx",
+      "audience": "visitor",
+      "summary": "Request a password reset when email is available."
+    },
+    {
+      "route": "/reset-password",
+      "file": "app/reset-password/page.tsx",
+      "audience": "visitor",
+      "summary": "Choose a password from a reset link."
+    }
+  ],
+  "roles": {
+    "owner": {
+      "source": "owner-pass",
+      "summary": "Runs the shop and edits prices, orders, settings and staff."
+    },
+    "staff": {
+      "source": "added-by-owner",
+      "summary": "Signs in, reads shop stock, receives purchase orders and fulfils sales orders."
+    },
+    "visitor": {
+      "source": "anonymous",
+      "summary": "Sees sign-in, invite and reset pages only."
+    }
+  },
+  "journeys": [
+    {
+      "id": "stock-overview",
+      "role": "staff",
+      "summary": "Reads stock and the move ledger.",
+      "status": "ships-working",
+      "checklist": "journeys/stock-overview.json"
+    },
+    {
+      "id": "receive-purchase",
+      "role": "owner",
+      "summary": "Creates and receives a purchase order.",
+      "status": "ships-working",
+      "checklist": "journeys/receive-purchase.json"
+    },
+    {
+      "id": "fulfil-sale",
+      "role": "staff",
+      "summary": "Fulfils a sales order without making stock negative.",
+      "status": "ships-working",
+      "checklist": "journeys/fulfil-sale.json"
+    },
+    {
+      "id": "stock-count",
+      "role": "owner",
+      "summary": "Records a counted quantity with a reason.",
+      "status": "ships-working",
+      "checklist": "journeys/stock-count.json"
+    },
+    {
+      "id": "edit-settings",
+      "role": "owner",
+      "summary": "Adds and removes a category and keeps a category in use.",
+      "status": "ships-working",
+      "checklist": "journeys/edit-settings.json"
+    },
+    {
+      "id": "invite-staff",
+      "role": "owner",
+      "summary": "Creates a single-use invitation for staff.",
+      "status": "ships-working",
+      "checklist": "journeys/invite-staff.json"
+    },
+    {
+      "id": "owner-settings",
+      "role": "owner",
+      "summary": "Opens settings through the owner pass.",
+      "status": "ships-working",
+      "checklist": "journeys/owner-settings.json"
+    },
+    {
+      "id": "signed-out",
+      "role": "visitor",
+      "summary": "A signed-out visitor cannot read stock.",
+      "status": "ships-working",
+      "checklist": "journeys/signed-out.json"
+    },
+    {
+      "id": "password-reset-off",
+      "role": "visitor",
+      "summary": "Explains that password reset needs email.",
+      "status": "ships-working",
+      "checklist": "journeys/password-reset-off.json"
+    },
+    {
+      "id": "send-purchase",
+      "role": "owner",
+      "summary": "Emails the supplier a purchase order.",
+      "status": "needs-capability",
+      "capability": "email"
+    },
+    {
+      "id": "low-stock-notice",
+      "role": "owner",
+      "summary": "Emails a low-stock notice.",
+      "status": "needs-capability",
+      "capability": "email"
+    },
+    {
+      "id": "item-csv",
+      "role": "owner",
+      "summary": "Imports and exports item CSV and exports stock moves.",
+      "status": "not-testable",
+      "reason": "Checklist actions cannot upload or inspect downloaded files. The headless walk and database tests verify the bytes."
+    }
+  ],
+  "capabilities": ["accounts", "server_data", "roles", "email", "file_input", "download"],
+  "notIncluded": [
+    "Email delivery requires the platform email module and a configured sender; off by default. Invitations can be passed on as one-time links.",
+    "Going live requires a platform live database; off by default.",
+    "No public sign-up. Each kit instance serves one shop; staff share that shop and other account roles have no access.",
+    "Staff cannot edit prices, settings, counts or create orders.",
+    "No partial receipts or partial fulfilment, returns, order edits, shipping, payments or accounting sync.",
+    "All prices are decimal amounts in the shop's own single currency; no exchange rates or tax calculation.",
+    "Low-stock notices are owner-triggered and deduplicated by recipient and current stock summary.",
+    "CSV imports add up to fifty new items per file; duplicate SKUs reject the whole import.",
+    "A member resets a password only with a verified email and email enabled; no signed-in staff password change."
+  ],
+  "protectedPaths": [
+    "lib/accounts.ts",
+    "lib/inventory/access.ts",
+    "lib/inventory/invites.ts",
+    "lib/inventory/data.ts"
+  ]
+}

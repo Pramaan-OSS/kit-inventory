@@ -1,0 +1,9 @@
+{
+  "routes": ["/invite"],
+  "nav": [
+    {
+      "href": "/invite",
+      "label": "Invite"
+    }
+  ]
+}

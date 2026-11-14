@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "blocks": [
+    {
+      "id": "password-reset",
+      "version": "0.1.0",
+      "source": "Pramaan-OSS/blocks",
+      "sourceCommit": "4577cabca086a430563c196b6cd86cc919f873c0",
+      "sourcePath": "registry/password-reset",
+      "licence": "MIT",
+      "sourceHashes": {
+        "registry/password-reset/README.md": "4e0fe6d2ac9063be68a3a1d94e86b87d95be15e5198a30e2b06cf0afa5f3208f",
+        "registry/password-reset/components/pramaan/password-reset/password-panel.tsx": "21c00ff55174a2b604fe46073e643ced6d8351b4f9acd140d1abaf49adb0bd08",
+        "registry/password-reset/lib/pramaan/password-reset.ts": "a7f3b5b19c8518bd5ee1a6685049a20c15133ed5ac226ad049d2288c9253c55b"
+      }
+    },
+    {
+      "id": "theme",
+      "version": "0.1.0",
+      "source": "Pramaan-OSS/blocks",
+      "sourceCommit": "4577cabca086a430563c196b6cd86cc919f873c0",
+      "sourcePath": "registry/theme",
+      "licence": "MIT",
+      "sourceHashes": {
+        "registry/theme/lib/pramaan/fonts.ts": "de90da679c962d19170f0dcd78f69558b435dd8a8aeba8b3bc176ecc754ff410",
+        "theme.css": "39e6aafb751ce69c964c0db7917af1b5112d9e64d0f9a5b2e38f48b1223bbdbc"
+      }
+    },
+    {
+      "id": "roles",
+      "version": "0.1.0",
+      "source": "Pramaan-Dev/product-loop",
+      "sourceCommit": "fbc5505d5dffed1e5410359ff65d59d21c872d21",
+      "sourcePath": "blocks/roles",
+      "sourceHashes": {
+        "BLOCK.md": "10b6565b67973583dae140afe35b264dd8b2ad0b14f502c943a10a7f5343632d",
+        "files/lib/roles/http.ts": "4d3310796b8eb9f3356b5b980963a9ef0aad340f2b9a9c57d3639b3e1917b1e4",
+        "pramaan.block.json": "5f8231d9eb063f5714a67297dbada669a94927315a3a9a9d1539727e5730f9bc"
+      }
+    }
+  ],
+  "adaptations": {
+    "password-reset": "Taken as the CRM kit adapted it: the starter's reset-request and reset actions own the proofs, delivery goes only through the platform email module (lib/email.ts), and the panel and its words are kept, with the help line changed to the business that sent the invite. Signed-in password change is not shipped. Version 0.1.0 is the kit's snapshot label; the registry has no version field.",
+    "theme": "Taken as the CRM kit adapted it: fonts from bundled npm packages in the starter's layout and theme.css, no remote font imports.",
+    "roles": "Same-origin bounded JSON request reader retained. Inventory guards grant only owner and staff access; only the owner can edit settings, items, prices and create orders."
+  }
+}

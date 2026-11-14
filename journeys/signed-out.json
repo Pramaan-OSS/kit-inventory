@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "id": "signed-out",
+      "label": "A signed-out visitor cannot read stock.",
+      "steps": [
+        {
+          "goto": "/stock"
+        },
+        {
+          "expectText": "Sign in to continue."
+        }
+      ]
+    }
+  ],
+  "names": {}
+}

@@ -1,0 +1,37 @@
+{
+  "kit": "inventory",
+  "version": "0.1.0",
+  "digest": "sha256:d84a74b0c04059886b155991f3071d3ef18ae5ff8eee414dd78118aaff0e0196",
+  "contract": "1",
+  "green": false,
+  "ranAt": "2026-11-14T03:31:29.829Z",
+  "run": null,
+  "gates": [
+    {
+      "id": "contract",
+      "ok": true,
+      "evidence": "92 files, 5 migrations, 12 journeys"
+    },
+    {
+      "id": "licence",
+      "ok": true,
+      "evidence": "MIT; derived, written by person"
+    },
+    {
+      "id": "secrets",
+      "ok": true,
+      "evidence": "Scanned 93 source files for credential-shaped material."
+    },
+    {
+      "id": "packages",
+      "ok": true,
+      "evidence": "3 packages beyond the starter's, every one under an allowed licence"
+    },
+    {
+      "id": "install",
+      "ok": false,
+      "evidence": "Full platform container run aborted before installation: CHAT_INSTALL_NETWORK_UNVERIFIED. Linux install-network verification unavailable on this machine; no guard bypassed. Remaining container gates not run. Native local checks are recorded in KIT.md and .scratch/KIT-DONE.md."
+    }
+  ],
+  "measured": null
+}
