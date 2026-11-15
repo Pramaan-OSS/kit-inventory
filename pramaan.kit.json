@@ -1,6 +1,6 @@
 {
   "id": "inventory",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "title": "Inventory and orders",
   "summary": "A small shop tracks items, stock moves, suppliers, customers, purchase receipts and sales fulfilment.",
   "category": "erp",
