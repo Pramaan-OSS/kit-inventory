@@ -4,7 +4,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 
 // The kit carries the starter's package.json, which has no browser tools: point WALK_BROWSER_MODULE at an installed
-// @playwright/test (its index.js) to run this walk.
+// @playwright/test (its index.mjs) to run this walk.
 const browserModule = process.env.WALK_BROWSER_MODULE;
 const { chromium, expect } = await import(
   browserModule ? pathToFileURL(browserModule).href : "@playwright/test"
@@ -150,19 +150,37 @@ try {
     ).toBe(200);
   const manifest = JSON.parse(readFileSync("pramaan.kit.json", "utf8"));
   for (const journey of manifest.journeys.filter((j) => j.status === "ships-working")) {
-    const context = journey.role === "visitor" ? await browser.newContext() : ownerContext;
-    const p = context === ownerContext ? page : await context.newPage();
     const checklist = JSON.parse(readFileSync(journey.checklist, "utf8"));
     console.log(`Journey ${journey.id}`);
+    // As the gate does: enterAs opens a fresh browser at home (signed out; the owner's signs in with a pass), and an
+    // enterAs with "as" returns to that named person's browser.
+    const contexts = [await browser.newContext()],
+      named = new Map();
+    let p = await contexts[0].newPage();
     for (const item of checklist.items)
       for (const step of item.steps) {
         if (step.enterAs) {
-          await p.goto(`${origin}/api/account/owner-pass?token=${encodeURIComponent(pass())}`);
+          const key = `${step.enterAs}\u0000${step.as ?? ""}`;
+          if (step.as && named.has(key)) p = named.get(key);
+          else {
+            contexts.push(await browser.newContext());
+            p = await contexts.at(-1).newPage();
+            await p.goto(
+              step.enterAs === "owner"
+                ? `${origin}/api/account/owner-pass?token=${encodeURIComponent(pass())}`
+                : `${origin}/`,
+            );
+            if (step.as) named.set(key, p);
+          }
         } else if (step.goto) await p.goto(origin + step.goto);
         else if (step.fill) await p.getByLabel(step.fill, { exact: true }).fill(step.value);
         else if (step.select)
           await p.getByLabel(step.select, { exact: true }).selectOption({ label: step.option });
-        else if (step.click) await p.getByRole("button", { name: step.click, exact: true }).click();
+        else if (step.click)
+          await p
+            .getByRole("button", { name: step.click, exact: true })
+            .or(p.getByRole("link", { name: step.click, exact: true }))
+            .click();
         else if (step.expectText)
           await expect(p.getByText(step.expectText, { exact: false }).first()).toBeVisible();
         else if (step.expectAbsent)
@@ -170,7 +188,7 @@ try {
         else throw Error(`Unknown checklist step ${JSON.stringify(step)}`);
       }
     results.push(journey.id);
-    if (context !== ownerContext) await context.close();
+    for (const context of contexts) await context.close();
   }
   // Accept and sign in with a real staff invitation, then fulfil through the staff screen.
   await page.goto(`${origin}/settings`);

@@ -8,4 +8,4 @@ Run `pnpm typecheck`, `pnpm lint`, `pnpm test`, `pnpm build`, `node scripts/chec
 
 Email uses the platform module socket and is off until the platform configures it. With email off, staff can join through an owner-shared one-time invite link. See KIT.md for extension points and limits.
 
-The kit carries no browser tools. To run `node scripts/walk.mjs`, install `@playwright/test` 1.64.1 outside the kit and set `WALK_BROWSER_MODULE` to its `index.js`.
+The kit carries no browser tools. To run `node scripts/walk.mjs`, install `@playwright/test` 1.64.1 outside the kit and set `WALK_BROWSER_MODULE` to its `index.mjs`.

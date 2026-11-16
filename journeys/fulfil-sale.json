@@ -101,6 +101,63 @@
           "expectText": "Journey sale"
         },
         {
+          "goto": "/settings"
+        },
+        {
+          "fill": "Staff email",
+          "value": "sale-staff@journey.test"
+        },
+        {
+          "click": "Invite staff"
+        },
+        {
+          "expectText": "Invite ready for sale-staff@journey.test."
+        },
+        {
+          "click": "Open staff invite"
+        },
+        {
+          "expectText": "You're joining as a staff member"
+        },
+        {
+          "fill": "Choose a password",
+          "value": "Sale-staff-passphrase-23"
+        },
+        {
+          "fill": "Type it again",
+          "value": "Sale-staff-passphrase-23"
+        },
+        {
+          "click": "Accept invite"
+        },
+        {
+          "expectText": "Signed in as sale-staff@journey.test"
+        },
+        {
+          "enterAs": "staff",
+          "as": "first"
+        },
+        {
+          "fill": "Email",
+          "value": "sale-staff@journey.test"
+        },
+        {
+          "fill": "Password",
+          "value": "Sale-staff-passphrase-23"
+        },
+        {
+          "click": "Sign in"
+        },
+        {
+          "expectText": "Signed in as sale-staff@journey.test, a staff member."
+        },
+        {
+          "goto": "/stock"
+        },
+        {
+          "expectText": "Journey sale"
+        },
+        {
           "click": "Fulfil Journey sale"
         },
         {
